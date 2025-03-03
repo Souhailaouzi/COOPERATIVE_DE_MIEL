@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIGOLD - Miel Artisanal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #FFA000;
+            --secondary: #FFD54F;
+            --dark-brown: #5D4037;
+            --light-brown: #8D6E63;
+            --text: #333333;
+            --white: #ffffff;
+            --light-bg: #f7f7f7;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 10px;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo strong {
+            color: var(--dark-brown);
+            font-size: 24px;
+        }
+
+        .nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav a {
+            color: var(--dark-brown);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark-brown);
+        }
+
+        /* Hero section */
+        .home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 8%;
+            position: relative;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('img/img1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding-top: 70px;
+        }
+
+        .home-content {
+            max-width: 600px;
+            color: var(--white);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .home-text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .home-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 160, 0, 0.3);
+        }
+
+        /* About section */
+        .about-section {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .subtitle {
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2, 
+        .section-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark-brown);
+            margin: 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after,
+        .section-header h1::after {
+            content: '🍯';
+            margin-left: 10px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-text {
+            color: var(--text);
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .features {
+            display: grid;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            background: rgba(255,160,0,0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .feature-content h4 {
+            color: var(--dark-brown);
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .feature-content p {
+            color: var(--text);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Products section */
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 6rem 1rem;
+            background-color: var(--light-bg);
+        }
+
+        .product-box {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-box h2 {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: var(--dark-brown);
+        }
+
+        .product-box p {
+            font-size: 1rem;
+            padding: 0 1rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            background: var(--dark-brown);
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            margin-bottom: 1.5rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .view-more-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+       
+        /* Footer */
+        footer {
+            background-color: var(--dark-brown);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ddd;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-section a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: var(--dark-brown);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-header h2,
+            .section-header h1 {
+                font-size: 2rem;
+            }
+
+            .home-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 568px) {
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .feature-icon {
+                margin: 0 auto;
+            }
+
+            .home-text h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <a href="#" class="logo">
+                <img src="img/logo.png" alt="Logo APIGOLD" class="logo-image">
+                <strong>APIGOLD</strong>
+            </a>
+            <ul>
+                <li><a href="#home"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> À Propos</a></li>
+                <li><a href="#products"><i class="fas fa-honey-pot"></i> Produits</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="auth.jsp"><i class="fas fa-shopping-basket"></i> Boutique</a></li>
+                <li><a href="auth.jsp"><i class="fas fa-user"></i> Connexion</a></li>
+            </ul>
+            <div class="nav-toggle">&#9776;</div>
+        </nav>
+    </header>
+
+    <section class="home" id="home">
+        <div class="home-content">
+            <div class="home-text">
+                <h1>Laissez-vous séduire par la douceur de notre miel artisanal</h1>
+                <p>Découvrez un trésor de la nature, récolté avec passion et savoir-faire 
+                    pour vous offrir une expérience gustative unique.</p>
+                
+                <a href="#products" class="cta-button">Découvrir nos miels</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="subtitle">Notre Histoire</span>
+                <h2>Découvrez notre savoir-faire artisanal</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="img/img2.jpg" alt="Notre rucher" class="main-image" />
+                </div>
+
+                <div class="about-text">
+                    <p class="lead">Depuis trois générations, notre famille perpétue la tradition de l'apiculture avec passion et dévouement.</p>
+                    
+                    <div class="features">
+                        <div class="feature-item">
+                            <div class="feature-icon">🌺</div>
+                            <div class="feature-content">
+                                <h4>Production Locale</h4>
+                                <p>Nos ruches sont situées au cœur de prairies fleuries naturelles.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🍯</div>
+                            <div class="feature-content">
+                                <h4>Qualité Artisanale</h4>
+                                <p>Extraction et mise en pot réalisées à la main dans notre miellerie.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🌿</div>
+                            <div class="feature-content">
+                                <h4>100% Naturel</h4>
+                                <p>Aucun traitement chimique, respect total de l'environnement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="section-header">
+            <span class="subtitle">Savourez l'Excellence</span>
+            <h2>Nos Produits</h2>
+        </div>
+        <div class="products">
+            <div class="product-box">
+                <img src="img/miel_de_caroube.jpg" alt="Miel de Caroube">
+                <h2>Miel de Caroube</h2>
+                <p>Un miel rare aux notes caramélisées et à la texture onctueuse.</p>
+                <a href="/cooperative/processCommande" class="view-more-btn">Voir plus</a>
+            </div>
+            
+            <div class="product-box">
+                <img src="img/miel_de_chardon.jpg" alt="Miel de Chardon">
+                <h2>Miel de Chardon</h2>
+                <p>Un miel délicat aux arômes floraux et au goût légèrement épicé.</p>
+                <a href="/cooperative/processCommande" class="view-more-btn">Voir plus</a>
+            </div>
+            
+            <div class="product-box">
+                <img src="img/miel_de_thym.jpg" alt="Miel de Thym">
+                <h2>Miel de Thym</h2>
+                <p>Un miel corsé aux puissantes notes aromatiques et vertus reconnues.</p>
+                <a href="/cooperative/processCommande" class="view-more-btn">Voir plus</a>
+            </div>
+
+            <div class="product-box">
+                <img src="img/miel_de_sidr.jpg" alt="Miel de Sidr">
+                <h2>Miel de Sidr</h2>
+                <p>Le roi des miels, récolté à partir du jujubier, aux vertus exceptionnelles.</p>
+                <a href="/cooperative/processCommande" class="view-more-btn">Voir plus</a>
+            </div>
+
+            <div class="product-box">
+                <img src="img/miel_d_orange.jpg" alt="Miel d'Orange">
+                <h2>Miel d'Orange</h2>
+                <p>Un miel doux aux notes d'agrumes, parfait pour le petit-déjeuner.</p>
+                <a href="/cooperative/processCommande" class="view-more-btn">Voir plus</a>
+            </div>
+        </div>
+   
+<section class="contact" id="contact">
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos de nous</h3>
+                <p>Nous sommes une entreprise locale spécialisée dans la production de miel de qualité supérieure, récoltée directement de nos ruches.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens Rapides</h3>
+                <a href="#home"><i class="fas fa-chevron-right"></i> Accueil</a>
+                <a href="#about"><i class="fas fa-chevron-right"></i> À Propos</a>
+                <a href="#products"><i class="fas fa-chevron-right"></i> Produits</a>
+                <a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a>
+                <a href="/cooperative/processCommande"><i class="fas fa-chevron-right"></i> Boutique</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contactez-nous</h3>
+                <p><i class="fas fa-phone"></i> +212 500 449 998</p>
+                <p><i class="fas fa-envelope"></i> contact@apigold.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Rue des Abeilles, Casablanca</p>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 APIGOLD MIEL. Tous droits réservés.
+        </div>
+        
+    </footer>
+  </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation toggle for mobile
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav ul');
+            
+            navToggle.addEventListener('click', function() {
+                if (navLinks.style.display === 'flex') {
+                    navLinks.style.display = 'none';
+                } else {
+                    navLinks.style.display = 'flex';
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu after clicking
+                        if (window.innerWidth <= 768) {
+                            navLinks.style.display = 'none';
+                        }
+                    }
+                });
+            });
+
+            // Example interaction for product boxes
+            const productBoxes = document.querySelectorAll('.product-box');
+            productBoxes.forEach(box => {
+                box.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
+                });
+                
+                box.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

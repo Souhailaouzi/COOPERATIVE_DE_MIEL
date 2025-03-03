@@ -1,0 +1,174 @@
+body {
+    background-image: url('img/loginimg.jpg'); /* Remplace 'background.jpg' par le chemin de ton image */
+    background-size: cover; /* Ajuste l'image pour couvrir toute la page */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    height: 100vh; /* Assure que le fond couvre toute la hauteur de l'écran */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Overlay noir semi-transparent */
+    z-index: -1;
+}
+
+/* Main Container */
+.container {
+    width: 465px;
+    height: 480px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
+    border: 3px solid rgba(255, 255, 255, 0.3); /* Bordure transparente */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    backdrop-filter: blur(10px); /* Effet de flou */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilité Safari */
+}
+
+/* Forms Wrapper */
+.forms-container {
+    display: flex;
+    width: 200%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Each Form */
+.form {
+    width: 50%;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    color: black;
+}
+
+/* Sliding Effect */
+.container .forms-container.active {
+    transform: translateX(-50%);
+}
+
+/* Input Fields */
+input, select {
+    width: 60%;  /* Same width for select and inputs */
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #d4a635;
+    background-color: #fff3cd;
+    font-size: 16px;
+    color: black;
+    padding-left: 15px;
+}
+
+/* Button Styling */
+button {
+    width: 60%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button Hover Effect */
+
+button:hover {
+    background-color: var(--primary); /* Vous pouvez aussi utiliser une variable pour la couleur de survol */
+}
+
+:root {
+    --primary: #FFA500; /* Une teinte d'orange, vous pouvez ajuster selon vos besoins */
+}
+
+/* Headings */
+h2 {
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: black;
+}
+
+h3 {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: black;
+}
+
+/* Phrases Under Titles */
+.social-login-phrase {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Social Login */
+.social-login {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.social-login span {
+    background-color: #f0f0f0;
+    border: 1px solid #d4a635;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+    width: 30%;
+    margin: 5px;
+    text-align: center;
+}
+
+.social-login span:hover {
+    background-color: #d4a635;
+    color: white;
+}
+
+/* Styling for links */
+.signup-phrase a, .login-phrase a {
+    color: #d4a635;
+    text-decoration: none;
+}
+
+.signup-phrase a:hover, .login-phrase a:hover {
+    color: #a68b2e;
+}
+
+/* Label Styling */
+label {
+    font-size: 16px;
+    color: black;
+    margin: 8px 0;
+    display: block;
+    text-align: left;
+}
+
+/* Role Dropdown (select) */
+select {
+    width: 68%;  /* Same width as the input fields */
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #d4a635;
+    background-color: #fff3cd;
+    font-size: 16px;
+    color: black;
+    padding-left: 15px;
+}
